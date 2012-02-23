@@ -1,0 +1,35 @@
+#!/bin/bash
+DIR=/var/apps/real
+NODE=/usr/bin/node
+FOREVER=/usr/bin/forever
+NAME=restreamer
+USER=defly
+
+test -x $NODE || exit 0
+
+function start_app {
+  sudo -u $USER $FOREVER stop $DIR/$NAME.js
+  # NODE_ENV=production $FOREVER start -a -l $DIR/logs/$NAME.log -o /dev/null -e $DIR/logs/$NAME.error.log --sourceDir $DIR $DIR/$NAME.js
+  sudo -u $USER NODE_ENV=production $FOREVER start -a -l $DIR/logs/$NAME.log $DIR/$NAME.js
+}
+
+function stop_app {
+  sudo -u $USER $FOREVER stop $DIR/$NAME.js
+}
+
+function restart_app {
+  sudo -u $USER $FOREVER restart $DIR/$NAME.js
+}
+
+case $1 in
+   start)
+      start_app ;;
+    stop)
+      stop_app ;;
+    restart)
+      restart_app
+      ;;
+    *)
+      echo "usage: nodeforever$NAME {start|stop|restart}" ;;
+esac
+exit 0

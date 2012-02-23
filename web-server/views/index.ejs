@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta property="og:title" content="Tweereal - real-time twitter activity map" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://tweereal.com" />
+  <meta property="og:image" content="" />
+  <meta property="og:site_name" content="Tweereal" />
+  <meta property="fb:admins" content="1384116072" />
+
+  <!-- <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'> -->
+  <link rel="stylesheet" href="static/reset.css">
+  <link rel="stylesheet" href="static/style.css">
+  <link rel="shortcut icon" href="static/images/favicon.png">
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript" src="static/basics.js"></script>
+  <script type="text/javascript" src="static/basicemitter.js"></script>
+  <script type="text/javascript" src="static/emitter.js"></script>
+  <script type="text/javascript" src="static/overlay.js"></script>
+  <script type="text/javascript" src="static/init.js"></script>
+
+</head>
+<body>
+  <div class="wrapper">
+    <div class="head">
+        <div class="linefirst">
+          <a href="http://tweereal.com"><h1>Tweereal is real-time twitter map (beta)</h1></a>
+          <div class="social">
+            <div class="like" id="gplus">
+              <g:plusone></g:plusone>
+            </div>
+            <div class="like">
+              <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tweereal.com" data-text="Real-time twitter activity map" data-via="tweereal" data-size="large" data-hashtags="geo">Tweet</a>              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="contain">
+          <div id="map_canvas"></div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="txt">
+          <h2>About</h2>
+          <p>
+          <a href="http://twitter.com/tweereal" class="link-twitter">@Tweereal</a> is the map of twitter users activity in real-time. Animation on the map include only tweets containing geo-tags. There are two types of tweets on a map: with the exact coordinates and the coordinates determined with an accuracy of 1 degree (more transparent). Based on Twitter Streaming API and Google Maps Javascript API. Developed by Artem Bey aka <a href="http://twitter.com/defly_self" class="link-twitter">@defly_self</a>
+
+          </p>
+        </div>
+        <div class="txt">
+          <h2>Please feedback</h2>
+          <a href="https://twitter.com/intent/tweet?screen_name=tweereal" class="twitter-mention-button" data-size="large" data-related="tweereal">Feedback</a>
+          <br>
+          <g:plusone></g:plusone>
+          <br>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tweereal.com" data-text="Real-time twitter activity map" data-via="tweereal" data-size="large" data-hashtags="geo">Share</a> 
+          <br>
+          <div id="fb-root"></div>  
+          <div class="fb-like" data-href="http://tweereal.com" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div> 
+          <!-- <p></p> -->
+        </div>
+      </div>
+       <div class="footer">
+        <a href="http://nodejs.org">
+          <img src="static/images/njs.png">
+        </a>
+        <a href="http://www.w3.org/html/logo/">
+<img src="static/images/html5-badge-h-connectivity-css3-graphics-multimedia-performance.png" width="261" height="64" alt="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Graphics, 3D &amp; Effects, Multimedia, and Performance &amp; Integration" title="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Graphics, 3D &amp; Effects, Multimedia, and Performance &amp; Integration">
+</a>       
+       </div> 
+  </div>
+  <script type="text/javascript" async=true>
+  //g+
+    (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+  //tw like
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //tw mention
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //fb like
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+  //analytics
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29303814-1']);
+  _gaq.push(['_setDomainName', 'tweereal.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+</body>
+</html>
