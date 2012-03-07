@@ -1,16 +1,12 @@
 html {
   font-family: Arial, sans-serif;
-  /*line-height: 1.5;*/
 }
 
 
 body {
-  /*background-image: url("images/subtle_zebra_3d.png");*/
-  /*background-image: url("images/chruch.png");*/
   background-image: url("images/project_papper.png");
   background-color: #eee;
   color: #515151;
-
 }
 
 .wrapper {
@@ -45,7 +41,7 @@ body {
   opacity: 0.5;
   -webkit-transition: opacity ease-in 0.2s;
   -moz-transition: opacity ease-in 0.2s;
-  /*-ms-transition: opacity ease-in 0.2s;*/
+  -ms-transition: opacity ease-in 0.2s;
   -o-transition: opacity ease-in 0.2s;
 }
 
@@ -72,7 +68,7 @@ body {
   text-decoration: none;
 }
 
-h1,h2 {
+h1,h2,h3,h4 {
   font-family: Ubuntu, sans-serif;
   font-style: italic;
   font-size: 36px;
@@ -81,7 +77,18 @@ h1,h2 {
 
 h2 {
   font-size: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 10px;  
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 7px;
+  
+}
+
+h4 {
+  font-size: 14px;
+  margin-bottom: 7px;
   
 }
 
@@ -114,12 +121,11 @@ h2 {
 }
 
 .contain {
-  /*padding-top: 24px;*/
   position: relative;
-  /*border-radius: 2px !important;*/
   overflow: hidden;
   width: 960px;
   height: 540px;
+  margin-bottom: 10px;
 }
 
 #map_canvas {
@@ -128,12 +134,21 @@ h2 {
   height: 100%;
 }
 
+#bubles {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+}
+
 .txt {
   width: 45%;
   line-height: 1.5;
   float: left;
   font-size: 14px;
   /*height: 300px;*/
+  /*overflow: hidden;*/
 }
 
 .txt:last-child {
@@ -143,4 +158,67 @@ h2 {
 .link-twitter {
   color: rgba(0,180,255,1);
   text-decoration: none;
+}
+
+.slider {
+  width:90%;
+  margin-bottom: 20px;
+}
+
+.slider-section {
+  width: 33.3%;
+  line-height: 1.5;
+  float: left;
+  /*background-color: aqua;*/
+
+}
+
+.ui-widget-content {
+  border: none;
+  /*border-color: rgba(227,50,88,0.2) !important;*/
+  background: none !important;
+  background-color: rgba(227,50,88,0.03) !important;
+  /*box-shadow: inset 0 2px 1px rgba(227,50,88,0.7) !important;*/
+  box-shadow: inset 0 1px 1px rgba(200,200,200,1), inset 0 -1px 1px rgba(200,200,200,0.1) !important;
+}
+
+.ui-slider-handle {
+  cursor: pointer !important;
+  height: 16px !important;
+  width: 22px !important;
+  top: -5px !important;
+  background: none !important;
+  background-color: rgba(250,247,247,1) !important;
+  background-image: url("images/lines.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  border-color: rgba(200,200,200,0.2) !important;
+  box-shadow: 0 1px 1px rgba(200,200,200,0.8);
+}
+
+.ui-state-active {
+  /*border: none !important;*/
+  /*background: none !important;*/
+  /*border-color: rgba(227,50,88,0.2) !important;*/
+  /*background-color: white !important;*/
+  outline:none;
+}
+
+.ui-state-focus {
+  /*border: none !important;*/
+  /*border-color: rgba(227,50,88,0.2) !important;*/
+  /*background: none !important;*/
+  /*background-color: white !important;*/
+  outline:none;
+}
+
+.ui-state-hover {
+  /*border: none !important;*/
+  /*background: none !important;*/
+  /*border-color: rgba(227,50,88,0.2) !important;*/
+  /*background-color: white !important;*/
+}
+
+.ui-slider-horizontal {
+  height: 8px;
 }

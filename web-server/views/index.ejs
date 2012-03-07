@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>sTweereal - real-time twitter activity map</title>
   <meta property="og:title" content="Tweereal - real-time twitter activity map" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="http://tweereal.com" />
   <meta property="og:image" content="" />
   <meta property="og:site_name" content="Tweereal" />
   <meta property="fb:admins" content="1384116072" />
-
-  <!-- <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'> -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/ui-lightness/jquery-ui.css">
   <link rel="stylesheet" href="static/reset.css">
   <link rel="stylesheet" href="static/style.css">
   <link rel="shortcut icon" href="static/images/favicon.png">
@@ -18,8 +18,9 @@
   <script type="text/javascript" src="static/basicemitter.js"></script>
   <script type="text/javascript" src="static/emitter.js"></script>
   <script type="text/javascript" src="static/overlay.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
   <script type="text/javascript" src="static/init.js"></script>
-
 </head>
 <body>
   <div class="wrapper">
@@ -39,6 +40,25 @@
       <div class="content">
         <div class="contain">
           <div id="map_canvas"></div>
+        </div>
+        <div class="sliders">
+          <div class="slider-section">
+            <h3>All tweets</h3>
+            <h4>Size</h4>
+            <div id="all-sliders-size" class="slider"></div>
+            <h4>Live time</h4>
+            <div id="all-sliders" class="slider"></div>
+          </div>
+          <div class="slider-section">
+            <h3>Exact tweets</h3>
+            <h4>Opacity</h4>
+            <div id="exact-sliders" class="slider"></div>
+          </div>
+          <div class="slider-section">
+            <h3>Places tweets</h3>
+            <h4>Opacity</h4>
+            <div id="places-sliders" class="slider"></div>
+          </div>
         </div>
       </div>
 
@@ -60,6 +80,9 @@
           <br>
           <div id="fb-root"></div>  
           <div class="fb-like" data-href="http://tweereal.com" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div> 
+          <br>
+          <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=defly&repo=tweereal&type=watch&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="62px" height="20px"></iframe>
           <!-- <p></p> -->
         </div>
       </div>
