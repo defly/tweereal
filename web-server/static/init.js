@@ -20,15 +20,15 @@ Activity.initialize = function() {
   Activity.map = new google.maps.Map(map_canvas, myOptions);
 
   Activity.overlay = new Activity.Overlay(Activity.map);
-  Activity.socket = io.connect('http://ctweereal');
+  Activity.socket = io.connect('http://ctweereal/');
 };
 
 Activity.dispatcher = function(msg) {
   var message = msg.split(" ");
   if (message[0] === "0") {
-    Activity.overlay.emitter.emit([message[1], message[2]], message[0]);  
+    Activity.overlay.emitter.emit([message[1], message[2]], message[0]);
   } else if (message[0] === "1") {
-    Activity.overlay.emitter.emit([message[1], message[2]], message[0]);  
+    Activity.overlay.emitter.emit([message[1], message[2]], message[0], message[3]);
   }
 };
 

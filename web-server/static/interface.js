@@ -44,16 +44,17 @@ Activity.Interface = function() {
 	}, {
 		"id": "places-precision",
 		"value": 50,
-		"handler": function(x) {},
+		"handler": function(x) {
+			options.precision = x;
+		},
 		"transform": function(y) {
-			// return 0.01 * Math.round(y);
+			return 0.02*Math.round(y);
 		}
 	}];
 
 	for (var i = sliders.length - 1; i >= 0; i--) {
 		sliders[i]["slider"] = new Activity.Interface.Slider(sliders[i]["id"], sliders[i]["value"], sliders[i]["handler"], sliders[i]["transform"]);
 	};
-
 
 	var switcherExact = new Activity.Interface.Switcher("exact-switcher", function() {
 		Activity.Bubble.prototype.renderNeat = Activity.Bubble.prototype.renderNeatOn;
@@ -71,7 +72,7 @@ Activity.Interface = function() {
 	$("#switch-defaults").on("click", function() {
 		for (var i = sliders.length - 1; i >= 0; i--) {
 			sliders[i]["slider"].toDefault();
-		};
+		}
 		switcherExact.on();
 		switcherPlaces.on();
 	});

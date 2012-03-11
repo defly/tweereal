@@ -10,13 +10,17 @@ Activity.Bubble = function(center, exact, precision) {
   var color = Activity.utils.randomColorArray();
   var self = this;
   this.precision = precision;
-  this.exact = exact;
+  // this.exact = exact;
   this.time = Date.now();
   this.cachedRGB = Activity.utils.cachedRGB(color);
   this.center = center;
-  this.render = function(phase,ctx) {
-    (exact === "1") ? self.renderBlur(phase,ctx) : self.renderNeat(phase,ctx);
-  };
+  this.render = function(phase, ctx) {
+    if (exact === "1") {
+      if (precision <= self.options.precision) self.renderBlur(phase, ctx);
+    } else {
+      self.renderNeat(phase, ctx);
+    }
+  }
 };
 
 
@@ -54,7 +58,8 @@ Activity.Bubble.prototype.options = {
   "neatStrokeOpacity": 1,
   "blurFillOpacity": 0.4,
   "blurStrokeOpacity": 0.5,
-  "zoom": 2
+  "zoom": 2,
+  "precision": 1
 };
 
 Activity.CanvasEmitter = function(div, options) {
@@ -105,12 +110,12 @@ Activity.CanvasEmitter = function(div, options) {
 
   div.appendChild(canvas);
 
-  this.emit = function(crd, exact) {
+  this.emit = function(crd, exact, precision) {
     var center = Activity.utils.latLngToPx(crd, this.projection);
 
     if (!notInProjection(center)) {
       // console.log("o");
-      bubbles.push(new Activity.Bubble(center, exact));
+      bubbles.push(new Activity.Bubble(center, exact, precision));
     }
 
   };
