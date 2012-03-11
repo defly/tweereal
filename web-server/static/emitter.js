@@ -5,23 +5,22 @@ window.requestAnimFrame = (function() {
   };
 })();
 
-Activity.dispatcher = function(msg) {
-  var params = msg.split(" ");
-  if (params[0] === "0") {
 
-  }
-};
-
-Activity.Bubble = function(center, exact) {
+Activity.Bubble = function(center, exact, precision) {
   var color = Activity.utils.randomColorArray();
+  var self = this;
+  this.precision = precision;
+  this.exact = exact;
   this.time = Date.now();
   this.cachedRGB = Activity.utils.cachedRGB(color);
   this.center = center;
-  // this.size = this.options.size;
-  this.render = (exact === "1") ? this.renderBlur : this.renderNeat;
+  this.render = function(phase,ctx) {
+    (exact === "1") ? self.renderBlur(phase,ctx) : self.renderNeat(phase,ctx);
+  };
 };
 
-Activity.Bubble.prototype.renderNeat = function(phase, ctx) {
+
+Activity.Bubble.prototype.renderNeatOn = function(phase, ctx) {
   ctx.beginPath();
   ctx.arc(this.center[0], this.center[1], this.options.size * phase, 0, 2 * Math.PI);
   ctx.fillStyle = Activity.utils.addRGBAlpha(this.cachedRGB, this.options.neatFillOpacity * (1 - phase));
@@ -31,7 +30,9 @@ Activity.Bubble.prototype.renderNeat = function(phase, ctx) {
   ctx.closePath();
 };
 
-Activity.Bubble.prototype.renderBlur = function(phase, ctx) {
+Activity.Bubble.prototype.renderNeat = Activity.Bubble.prototype.renderNeatOn;
+
+Activity.Bubble.prototype.renderBlurOn = function(phase, ctx) {
   ctx.beginPath();
   ctx.arc(this.center[0], this.center[1], this.options.size * phase, 0, 2 * Math.PI);
   ctx.fillStyle = Activity.utils.addRGBAlpha(this.cachedRGB, this.options.blurFillOpacity * (1 - phase));
@@ -41,17 +42,19 @@ Activity.Bubble.prototype.renderBlur = function(phase, ctx) {
   ctx.closePath();
 };
 
+Activity.Bubble.prototype.renderBlur = Activity.Bubble.prototype.renderBlurOn;
+
 Activity.Bubble.prototype.options = {
   "size": 10,
   "baseSize": 10,
   "baseFillOpacity": 0.8,
   "baseStrokeOpacity": 1,
-  // "maxSize": 10,
   "live": 750,
   "neatFillOpacity": 0.8,
   "neatStrokeOpacity": 1,
   "blurFillOpacity": 0.4,
-  "blurStrokeOpacity": 0.5
+  "blurStrokeOpacity": 0.5,
+  "zoom": 2
 };
 
 Activity.CanvasEmitter = function(div, options) {
@@ -65,13 +68,13 @@ Activity.CanvasEmitter = function(div, options) {
   var notInProjection = function(center) {
       return (center[0] < -bubbleOptions.size || center[0] > self.width + bubbleOptions.size || center[1] < -bubbleOptions.size || center[1] > self.height + bubbleOptions.size);
       };
-  
+
   var tweetPhase = function(start, live) {
       return (Date.now() - start) / live;
-      };      
-  
+      };
+
   var filterHandler = function(el) {
-      var phase = tweetPhase(el.time, bubbleOptions .live);
+      var phase = tweetPhase(el.time, bubbleOptions.live);
       if (phase < 1) {
         el.render(phase, ctx);
         return true;
@@ -79,7 +82,7 @@ Activity.CanvasEmitter = function(div, options) {
         return false;
       }
       };
-      
+
   var animation = function() {
       ctx.clearRect(0, 0, self.width, self.height);
 
@@ -101,7 +104,7 @@ Activity.CanvasEmitter = function(div, options) {
   canvas.height = this.height;
 
   div.appendChild(canvas);
-      
+
   this.emit = function(crd, exact) {
     var center = Activity.utils.latLngToPx(crd, this.projection);
 
@@ -129,6 +132,8 @@ Activity.CanvasEmitter = function(div, options) {
 
   this.updateSize = function(zoom) {
     bubbleOptions.size = Math.round(Math.sqrt(zoom) * bubbleOptions.baseSize);
+    // console.log(zoom);
+    bubbleOptions.zoom = zoom;
   };
 
 };

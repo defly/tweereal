@@ -3,9 +3,6 @@ Activity.Overlay = function(map) {
   this.div = null;
   this.setMap(map);
   this.divStyle = window.getComputedStyle(this.map.getDiv());
-  this.socketListener = function(){
-
-  };
 };
 
 Activity.Overlay.prototype = new google.maps.OverlayView();
@@ -41,14 +38,6 @@ Activity.Overlay.prototype.onAdd = function() {
     overlay.draw();
     overlay.emitter.start();
   });
-
-  overlay.socketListener = function(event) {
-    var message = event.split(" ");
-    // if (message[0] === "2") console.log(message);
-    overlay.emitter.emit([message[1], message[2]],message[0]); 
-  };
-
-  Activity.socket.on('message', overlay.socketListener);
 
 };
 

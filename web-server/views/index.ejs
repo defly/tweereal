@@ -20,6 +20,7 @@
   <script type="text/javascript" src="static/overlay.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="static/interface.js"></script>
   <script type="text/javascript" src="static/init.js"></script>
 </head>
 <body>
@@ -41,23 +42,32 @@
         <div class="contain">
           <div id="map_canvas"></div>
         </div>
+        <div class="switch-defaults" id="switch-defaults">Default settings</div>
         <div class="sliders">
           <div class="slider-section">
-            <h3>All tweets</h3>
-            <h4>Size</h4>
+            <div class="sliders-label">All tweets</div>
+            <div class="slider-def">Size</div>
             <div id="all-sliders-size" class="slider"></div>
-            <h4>Live time</h4>
-            <div id="all-sliders" class="slider"></div>
+            <div class="slider-def">Live time</div>
+            <div id="all-sliders-live" class="slider"></div>
           </div>
           <div class="slider-section">
-            <h3>Exact tweets</h3>
-            <h4>Opacity</h4>
-            <div id="exact-sliders" class="slider"></div>
+            <div class="sliders-label">
+              <div>Exact tweets</div> 
+              <div class="switch-on-off on" id="exact-switcher">on</div>
+            </div>
+            <div class="slider-def">Opacity</div>
+            <div id="exact-opacity" class="slider"></div>
           </div>
           <div class="slider-section">
-            <h3>Places tweets</h3>
-            <h4>Opacity</h4>
-            <div id="places-sliders" class="slider"></div>
+            <div class="sliders-label">
+              <div>Places tweets</div>
+              <div class="switch-on-off on" id="places-switcher">on</div>
+            </div>
+            <div class="slider-def">Opacity</div>
+            <div id="places-opacity" class="slider"></div>
+            <div class="slider-def">Precision</div>
+            <div id="places-precision" class="slider"></div>
           </div>
         </div>
       </div>
@@ -67,7 +77,6 @@
           <h2>About</h2>
           <p>
           <a href="http://twitter.com/tweereal" class="link-twitter">@Tweereal</a> is the map of twitter users activity in real-time. Animation on the map include only tweets containing geo-tags. There are two types of tweets on a map: with the exact coordinates and the coordinates determined with an accuracy of 1 degree (more transparent). Based on Twitter Streaming API and Google Maps Javascript API. Developed by Artem Bey aka <a href="http://twitter.com/defly_self" class="link-twitter">@defly_self</a>
-
           </p>
         </div>
         <div class="txt">
@@ -81,8 +90,8 @@
           <div id="fb-root"></div>  
           <div class="fb-like" data-href="http://tweereal.com" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div> 
           <br>
-          <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=defly&repo=tweereal&type=watch&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="62px" height="20px"></iframe>
+          <!-- <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=defly&repo=tweereal&type=watch&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="62px" height="20px"></iframe> -->
           <!-- <p></p> -->
         </div>
       </div>
