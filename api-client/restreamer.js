@@ -1,5 +1,4 @@
 var authConf = require('./apiConf.js').authConf;
-
 var reqConf = {
 	port: 443,
 	host: 'stream.twitter.com',
@@ -11,9 +10,9 @@ var reqConf = {
 		locations: '-180,-90,180,90'
 	}
 };
-
+var redis = require("redis");
 var streamer = new(require("./lib/Streamer.js").Streamer)(authConf, reqConf);
-var restreamer = new(require("./lib/RestreamServer.js").RestreamServer)(8090, "127.0.0.1");
+var filters = {};
 
 var roundWithDepth = function(x, depthNum) {
 		return Math.round(x * depthNum) / depthNum;
@@ -71,25 +70,29 @@ var customFilter = function(tweet) {
 		}
 	};
 
-var filters = {};
+var redisClient = redis.createClient();
+
+var write = function(message) {
+		redisClient.publish("T", message);
+	};
 
 filters.exact = function(tweet) {
 	var coordinates = tweet.coordinates.coordinates.reverse();
 	if (!(coordinates[0] === 0 && coordinates[1] === 0)) {
-		restreamer.write("0 " + coordinates[0] + " " + coordinates[1] + "\r\n");
+		write("0 " + coordinates[0] + " " + coordinates[1] + "\r\n");
 	}
 };
 
 filters.notExact = function(tweet) {
 	var boundCoordinates = boundingToCoordinates(tweet.place.bounding_box.coordinates[0], 2);
 	if (boundCoordinates !== false) {
-		restreamer.write("1 " + boundCoordinates[0] + " " + boundCoordinates[1] + " " + boundCoordinates[2] + "\r\n");
+		write("1 " + boundCoordinates[0] + " " + boundCoordinates[1] + " " + boundCoordinates[2] + "\r\n");
 	}
 };
 
 filters.limit = function(tweet) {
 	var quality = q.getQuality(tweet.limit.track);
-	restreamer.write("2 " + quality + "\r\n");
+	write("2 " + quality + "\r\n");
 };
 
 streamer.stream();
