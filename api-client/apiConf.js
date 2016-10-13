@@ -1,8 +1,8 @@
 var authConf = {
-	"consumerKey":"",
-	"consumerSecret":"",
-	"tokenKey":"",
-	"tokenSecret":""
+  "consumerKey":"",
+  "consumerSecret":"",
+  "tokenKey":"",
+  "tokenSecret":""
 }
 
 exports.authConf = authConf;
